@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics Guider — NEXA AI Science Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#040f22;font-family:'DM Sans',sans-serif}
+
+/* ── HEADER ── */
+header{
+  height:52px;
+  background:#ffffff;
+  border-bottom:1.5px solid #ddeeff;
+  display:flex;
+  align-items:center;
+  padding:0 18px;
+  gap:12px;
+  box-shadow:0 2px 16px rgba(13,45,98,.10);
+  flex-shrink:0;
+  position:relative;
+  z-index:100;
+}
+
+.logo-wrap{display:flex;align-items:center;gap:10px}
+.logo-img{height:38px;width:auto;object-fit:contain}
+
+.logo-fallback{
+  width:38px;height:38px;border-radius:8px;
+  background:linear-gradient(135deg,#1a52a8,#0d2d62);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:14px;font-weight:900;
+  color:#fff;letter-spacing:-.5px;flex-shrink:0;
+}
+
+.logo-text{display:flex;flex-direction:column;line-height:1.15}
+.logo-name{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-weight:900;
+  color:#0d2d62;letter-spacing:.01em;
+}
+.logo-sub{
+  font-size:9.5px;font-weight:600;
+  color:#2a6fd4;letter-spacing:.18em;
+  text-transform:uppercase;
+}
+
+.powered{
+  margin-left:auto;
+  font-size:11px;font-weight:500;
+  color:#8ea6c8;
+  background:#f0f6ff;
+  border:1px solid #ddeeff;
+  border-radius:20px;
+  padding:4px 12px;
+  white-space:nowrap;
+}
+.powered span{color:#2a6fd4;font-weight:700}
+
+/* ── IFRAME ── */
+.frame-wrap{
+  width:100%;
+  height:calc(100vh - 52px);
+  position:relative;
+}
+iframe{
+  width:100%;
+  height:100%;
+  border:none;
+  display:block;
+}
+
+/* loading overlay */
+.loader{
+  position:absolute;inset:0;
+  background:#040f22;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:18px;
+  z-index:10;
+  transition:opacity .5s ease;
+}
+.loader-logo{
+  font-family:'Playfair Display',serif;
+  font-size:48px;font-weight:900;
+  color:#fff;letter-spacing:.08em;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.loader-dots{display:flex;gap:8px}
+.loader-dots span{
+  width:8px;height:8px;border-radius:50%;
+  background:#5a9aee;
+  animation:bounce 1.2s infinite;
+}
+.loader-dots span:nth-child(2){animation-delay:.2s}
+.loader-dots span:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,100%{transform:translateY(0);opacity:.3}50%{transform:translateY(-8px);opacity:1}}
+.loader-text{font-size:13px;color:rgba(168,200,248,.6);letter-spacing:.06em}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-wrap">
+    <img
+      class="logo-img"
+      src="pg-logo.png"
+      alt="Physics Guider"
+      onerror="this.style.display='none';document.getElementById('pgfallback').style.display='flex'"
+    >
+    <div class="logo-fallback" id="pgfallback" style="display:none">PG</div>
+    <div class="logo-text">
+      <span class="logo-name">Physics Guider</span>
+      <span class="logo-sub">NEXA AI Platform</span>
+    </div>
+  </div>
+  <div class="powered">Powered by <span>NEXA AI</span></div>
+</header>
+
+<!-- APP IFRAME -->
+<div class="frame-wrap">
+  <div class="loader" id="loader">
+    <div class="loader-logo">NEXA</div>
+    <div class="loader-dots">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="loader-text">Loading Physics Guider...</div>
+  </div>
+  <iframe
+    src="https://samia08-nexa-physics-ai.hf.space"
+    title="NEXA Physics AI"
+    allow="microphone; camera; clipboard-read; clipboard-write"
+    onload="document.getElementById('loader').style.opacity='0';setTimeout(()=>document.getElementById('loader').style.display='none',500)"
+  ></iframe>
+</div>
+
+</body>
+</html>
