@@ -1,66 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NEXA</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics Guider — NEXA AI Science Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-    background: transparent;
-    font-family: Arial, sans-serif;
-  }
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#040f22;font-family:'DM Sans',sans-serif}
 
-  .frame-wrap {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-  }
+/* RIGHT — powered by */
+.powered{
+  position:fixed;
+  top:16px;
+  right:16px;
+  z-index:100;
+  font-size:11px;
+  font-weight:500;
+  color:#8ea6c8;
+  background:#f0f6ff;
+  border:1px solid #ddeeff;
+  border-radius:20px;
+  padding:4px 12px;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.powered span{color:#2a6fd4;font-weight:700}
 
-  iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    display: block;
-  }
+/* ── IFRAME ── */
+.frame-wrap{
+  width:100%;
+  height:100vh;
+  position:relative;
+}
+iframe{
+  width:100%;
+  height:100%;
+  border:none;
+  display:block;
+}
 
-  .powered {
-    position: fixed;
-    top: 16px;
-    right: 16px;
-    z-index: 10;
-    padding: 8px 14px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.18);
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.25);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-  }
-
-  .powered span {
-    font-weight: 800;
-  }
+/* ── LOADER ── */
+.loader{
+  position:absolute;inset:0;
+  background:#040f22;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:18px;z-index:10;
+  transition:opacity .5s ease;
+}
+.loader-logo{
+  font-family:'Philosopher',serif;
+  font-size:52px;
+  font-weight:700;
+  color:#fff;
+  letter-spacing:.1em;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.loader-dots{display:flex;gap:8px}
+.loader-dots span{
+  width:8px;height:8px;border-radius:50%;
+  background:#5a9aee;
+  animation:bounce 1.2s infinite;
+}
+.loader-dots span:nth-child(2){animation-delay:.2s}
+.loader-dots span:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,100%{transform:translateY(0);opacity:.3}50%{transform:translateY(-8px);opacity:1}}
+.loader-text{font-size:13px;color:rgba(168,200,248,.55);letter-spacing:.06em}
 </style>
 </head>
 <body>
-  <div class="frame-wrap">
-    <iframe
-      src="https://samia08-nexa-physics-ai.hf.space"
-      title="NEXA AI"
-      allow="microphone; camera; clipboard-read; clipboard-write"
-    ></iframe>
+
+<div class="powered">Powered by <span>Physics Guider</span></div>
+
+<!-- APP IFRAME -->
+<div class="frame-wrap">
+  <div class="loader" id="loader">
+    <div class="loader-logo">NEXA</div>
+    <div class="loader-dots">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="loader-text">Loading Physics Guider...</div>
   </div>
 
-  <div class="powered">Powered by <span>Physics Guider</span></div>
+  <iframe
+    src="https://samia08-nexa-physics-ai.hf.space"
+    title="NEXA Physics AI"
+    allow="microphone; camera; clipboard-read; clipboard-write"
+    onload="document.getElementById('loader').style.opacity='0';setTimeout(()=>document.getElementById('loader').style.display='none',500)"
+  ></iframe>
+</div>
+
 </body>
 </html>
